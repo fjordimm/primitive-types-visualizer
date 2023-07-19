@@ -1,5 +1,60 @@
 
+:root
+{
+	--margin: 0px;
+	--padding: 1px;
+	--medium-margin: 5px;
+	--horiz-between-margin: 50px;
+}
+
 body
 {
 	font-family: sans-serif;
+}
+
+input
+{
+	margin: var(--margin);
+	padding: var(--padding);
+	margin-right: var(--medium-margin);
+}
+
+p
+{
+	margin: var(--margin);
+	padding: var(--padding);
+}
+
+div.horiz-plain-line
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+
+	margin: var(--margin);
+	padding: var(--padding);
+}
+
+div.vert-list
+{
+	display: flex;
+	flex-direction: column;
+
+	margin: var(--margin);
+	padding: var(--padding);
+}
+
+div.horiz-flexbox
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+
+	margin: var(--margin);
+	padding: var(--padding);
+}
+
+.horiz-flexbox > div
+{
+	padding-right: var(--horiz-between-margin);
 }
