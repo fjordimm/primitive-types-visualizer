@@ -4,57 +4,145 @@
 	--margin: 0px;
 	--padding: 1px;
 	--medium-margin: 5px;
-	--horiz-between-margin: 50px;
+	--big-margin: 50px;
+
+	--sans-serif-font: sans-serif;
+	--monospace-font: monospace;
 }
 
 body
 {
-	font-family: sans-serif;
-}
-
-input
-{
-	margin: var(--margin);
-	padding: var(--padding);
-	margin-right: var(--medium-margin);
+	font-family: var(--sans-serif-font);
 }
 
 p
 {
 	margin: var(--margin);
 	padding: var(--padding);
+
+	font-family: var(--sans-serif-font);
 }
 
-div.horiz-plain-line
+label
+{
+	margin: var(--margin);
+	padding: var(--padding);
+
+	font-family: var(--sans-serif-font);
+}
+
+.input-textarea
+{
+	margin: var(--margin);
+	padding: var(--padding);
+
+	width: calc(var(--big-margin) * 7);
+
+	resize: none;
+	
+	font-family: var(--monospace-font);
+}
+
+.output-textarea
+{
+	margin: var(--margin);
+	padding: var(--padding);
+	margin-top: var(--medium-margin);
+
+	width: calc(var(--big-margin) * 5);
+
+	resize: none;
+
+	font-family: var(--monospace-font);
+}
+
+input[type="radio"]
+{
+	margin: var(--margin);
+	padding: var(--padding);
+}
+
+input[type="checkbox"]
+{
+	margin: var(--margin);
+	padding: var(--padding);
+}
+
+.bin-buttons
+{
+
+}
+
+.primtype-div
+{
+	margin: var(--margin);
+	padding: var(--medium-margin);
+
+	border: 1px solid black;
+}
+
+.horiz-plain-line
 {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 
-	margin: var(--margin);
-	padding: var(--padding);
+	margin: 0px;
+	padding: 0px;
 }
 
-div.vert-list
+.horiz-plain-line > div
+{
+	margin-right: var(--medium-margin);
+}
+
+.vert-list
 {
 	display: flex;
 	flex-direction: column;
 
-	margin: var(--margin);
-	padding: var(--padding);
+	margin: 0px;
+	padding: 0px;
 }
 
-div.horiz-flexbox
+.horiz-flexbox
 {
 	display: flex;
 	flex-direction: row;
-	justify-content: left;
 
-	margin: var(--margin);
-	padding: var(--padding);
+	margin: 0px;
+	padding: 0px;
 }
 
 .horiz-flexbox > div
 {
-	padding-right: var(--horiz-between-margin);
+	margin-right: var(--big-margin);
+}
+
+.vert-flexbox
+{
+	display: flex;
+	flex-direction: column;
+
+	margin: 0px;
+	padding: 0px;
+}
+
+.vert-flexbox > div
+{
+	margin-bottom: var(--big-margin);
+}
+
+.vert-flexbox-thin
+{
+	display: flex;
+	flex-direction: column;
+
+	margin: 0px;
+	padding: 0px;
+}
+
+.vert-flexbox-thin > div
+{
+	margin-bottom: var(--medium-margin);
 }

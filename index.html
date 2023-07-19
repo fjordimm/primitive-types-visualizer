@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>Primitive Types Visualizer</title>
@@ -8,15 +9,49 @@
 	</head>
 
 	<body>
-		<div class="horiz-flexbox">
+		<div class="vert-flexbox">
+
 			<div class="vert-list">
-				<div class="horiz-plain-line"><input type="checkbox"><p>haha</p></div>
-				<div class="horiz-plain-line"><input type="checkbox"><p>sadasdfasdfdf</p></div>
+				<p>Input:</p>
+				<div class="horiz-plain-line">
+					<textarea class="input-textarea" rows=1 id="main-text-input"></textarea>
+					<button>Update</button>
+				</div>
+				<div class="horiz-plain-line">
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-auto" value="Auto" checked>Auto</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-decimal" value="Decimal">Decimal</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-hexadecimal" value="Hexadecimal">Hexadecimal</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-octal" value="Octal">Octal</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-binary" value="Binary">Binary</label>
+				</div>
 			</div>
-			<div class="vert-list">
-				<div class="horiz-plain-line"><input type="checkbox"><p>dick</p></div>
-				<div class="horiz-plain-line"><input type="checkbox"><p>dog</p></div>
+
+			<div class="horiz-flexbox">
+
+				<div class="primtype-div" id="uint8">
+					<div class="vert-flexbox-thin">
+						<p>Unsigned 8-bit Int</p>
+						<textarea class="output-textarea" rows=1 id="uint8-dec"></textarea>
+						<textarea class="output-textarea" rows=1 id="uint8-hex"></textarea>
+						<textarea class="output-textarea" rows=1 id="uint8-octal"></textarea>
+						<textarea class="output-textarea" rows=1 id="uint8-binary"></textarea>
+					</div>
+				</div>
+
+				<div class="primtype-div" id="sint8">
+					<div class="vert-flexbox-thin">
+						<p>Signed 8-bit Int</p>
+						<textarea class="output-textarea" rows=1 id="uint8-dec"></textarea>
+						<textarea class="output-textarea" rows=1 id="uint8-hex"></textarea>
+						<textarea class="output-textarea" rows=1 id="uint8-octal"></textarea>
+						<textarea class="output-textarea" rows=1 id="uint8-binary"></textarea>
+						<span class="bin-buttons"></span>
+					</div>
+				</div>
+
 			</div>
+
 		</div>
 	</body>
+
 </html>
