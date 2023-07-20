@@ -1,7 +1,6 @@
 
 const isPlainDec = new RegExp("^[\+\-]?[0-9]+(\.[0-9]+(e[\+\-]?[0-9]+)?)?$");
 const isPlainDecInt = new RegExp("^[\+\-]?[0-9]+$");
-const isNonDecInt = new RegExp("^0[a-zA-Z][0-9]+$");
 
 const isHex = new RegExp("^0[xX][0-9a-fA-F]+$");
 const isPlainHexInt = new RegExp("^[0-9a-fA-F]+$");
@@ -14,8 +13,7 @@ const isPlainBinInt = new RegExp("^[0-1]+$");
 
 function handleMainInputChange(event)
 {
-	let radioInpChecked = document.querySelector('input[name="radio-textinp"]:checked');
-	handleMainInput(event.target, event.target.value, radioInpChecked.value);
+	handleMainInput(event.target, event.target.value);
 }
 
 function handleMainInputKeydown(event)
@@ -23,144 +21,32 @@ function handleMainInputKeydown(event)
 	if (event.key == "Enter")
 	{
 		event.target.blur();
-		let radioInpChecked = document.querySelector('input[name="radio-textinp"]:checked');
-		handleMainInput(event.target, event.target.value, radioInpChecked.value);
+		handleMainInput(event.target, event.target.value);
 	}
 }
 
-function handleRadioInputClick(event)
-{
-	let mainInput = document.getElementById("main-text-input");
-	handleMainInput(mainInput, mainInput.value, event.target.value);
-}
-
-function handleMainInput(element, inpText, inpType)
+function handleMainInput(element, inpText)
 {
 	resetBadInput(element);
 
-	if (inpType != "Hexadecimal" && isNaN(Number(inpText)))
+	if (isPlainDecInt.test(inpText) || isHex.test(inpText) || isOct.test(inpText) || isBin.test(inpText))
+	{
+		let num = BigInt(inpText);
+		let val = new BigInt64Array([num]);
+		processInput(val);
+		return;
+	}
+	else if (isPlainDec.test(inpText))
+	{
+		let num = Number(inpText);
+		let val = new Float64Array([num]);
+		processInput(val);
+		return;
+	}
+	else
 	{
 		activateBadInput(element);
 		return;
-	}
-
-	if (inpType == "Auto")
-	{
-		if (isPlainDecInt.test(inpText) || isNonDecInt.test(inpText))
-		{
-			let num = BigInt(inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else if (isPlainDec.test(inpText))
-		{
-			let num = Number(inpText);
-			let val = new Float64Array([num]);
-			processInput(val);
-			return;
-		}
-		else
-		{
-			activateBadInput(element);
-			return;
-		}
-	}
-	else if (inpType == "Decimal (Int)")
-	{
-		if (isPlainDecInt.test(inpText) || isNonDecInt.test(inpText))
-		{
-			let num = BigInt(inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else
-		{
-			activateBadInput(element);
-			return;
-		}
-	}
-	else if (inpType == "Decimal (Float)")
-	{
-		if (isPlainDec.test(inpText))
-		{
-			let num = Number(inpText);
-			let val = new Float64Array([num]);
-			processInput(val);
-			return;
-		}
-		else
-		{
-			activateBadInput(element);
-			return;
-		}
-	}
-	else if (inpType == "Hexadecimal")
-	{
-		if (isHex.test(inpText))
-		{
-			let num = BigInt(inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else if (isPlainHexInt.test(inpText))
-		{
-			let num = BigInt("0x" + inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else
-		{
-			activateBadInput(element);
-			return;
-		}
-	}
-	else if (inpType == "Octal")
-	{
-		if (isOct.test(inpText))
-		{
-			let num = BigInt(inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else if (isPlainOctInt.test(inpText))
-		{
-			let num = BigInt("0o" + inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else
-		{
-			activateBadInput(element);
-			return;
-		}
-	}
-	else if (inpType == "Binary")
-	{
-		if (isBin.test(inpText))
-		{
-			let num = BigInt(inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else if (isPlainBinInt.test(inpText))
-		{
-			let num = BigInt("0b" + inpText);
-			let val = new BigInt64Array([num]);
-			processInput(val);
-			return;
-		}
-		else
-		{
-			activateBadInput(element);
-			return;
-		}
 	}
 }
 
