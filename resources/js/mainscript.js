@@ -196,10 +196,10 @@ function processInput(val)
 	const sint32 = new Int32Array([Number(val[0])]);
 	const sint64 = new BigInt64Array([val[0]]);
 
-	processInputFor(val, uint8, "uint8");
+	processInputFor(val, uint8, "uint8", 8);
 }
 
-function processInputFor(origVal, val, type)
+function processInputFor(origVal, val, type, actualBits)
 {
 	const elm = document.getElementById(`${type}`);
 	const decElm = document.getElementById(`${type}-dec`);
@@ -221,5 +221,7 @@ function processInputFor(origVal, val, type)
 	resetBadInput(binElm);
 
 	decElm.value = val[0].toString();
-	hexElm.value = "0x" + val[0].toString(16);
+	hexElm.value = "0x" + val[0].toString(16).toUpperCase().padStart(actualBits / 4, '0');
+	octElm.value = "0o" + val[0].toString(8).padStart(Math.ceil(actualBits / 3), '0');
+	binElm.value = "0b" + val[0].toString(2).padStart(actualBits, '0');
 }
