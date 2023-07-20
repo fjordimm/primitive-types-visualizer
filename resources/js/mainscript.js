@@ -34,20 +34,20 @@ function handleMainInput(element, inpText, inpType)
 	const isPlainDecInt = new RegExp("^[\+\-]?[0-9]+$");
 	const isNonDecInt = new RegExp("^0[a-zA-Z]");
 
-	const isHex = new RegExp("^[\+\-]?0[xX]");
-	const isPlainHexInt = new RegExp("^[\+\-]?[0-9a-fA-F]+$");
+	const isHex = new RegExp("^0[xX]");
+	const isPlainHexInt = new RegExp("^[0-9a-fA-F]+$");
 
-	const isOct = new RegExp("^[\+\-]?0[oO]");
-	const isPlainOctInt = new RegExp("^[\+\-]?[0-7]+$");
+	const isOct = new RegExp("^0[oO]");
+	const isPlainOctInt = new RegExp("^[0-7]+$");
 
-	const isBin = new RegExp("^[\+\-]?0[bB]");
-	const isPlainBinInt = new RegExp("^[\+\-]?[0-1]+$");
+	const isBin = new RegExp("^0[bB]");
+	const isPlainBinInt = new RegExp("^[0-1]+$");
 
 	if (inpType == "Auto")
 	{
 		if (isPlainDecInt.test(inpText) || isNonDecInt.test(inpText))
 		{
-			let num = BigInt(Number(inpText));
+			let num = BigInt(inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
@@ -69,7 +69,7 @@ function handleMainInput(element, inpText, inpType)
 	{
 		if (isPlainDecInt.test(inpText) || isNonDecInt.test(inpText))
 		{
-			let num = BigInt(Number(inpText));
+			let num = BigInt(inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
@@ -99,14 +99,14 @@ function handleMainInput(element, inpText, inpType)
 	{
 		if (isHex.test(inpText))
 		{
-			let num = BigInt(Number(inpText));
+			let num = BigInt(inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
 		}
 		else if (isPlainHexInt.test(inpText))
 		{
-			let num = BigInt(Number("0x" + inpText));
+			let num = BigInt("0x" + inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
@@ -121,14 +121,14 @@ function handleMainInput(element, inpText, inpType)
 	{
 		if (isOct.test(inpText))
 		{
-			let num = BigInt(Number(inpText));
+			let num = BigInt(inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
 		}
 		else if (isPlainOctInt.test(inpText))
 		{
-			let num = BigInt(Number("0o" + inpText));
+			let num = BigInt("0o" + inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
@@ -143,14 +143,14 @@ function handleMainInput(element, inpText, inpType)
 	{
 		if (isBin.test(inpText))
 		{
-			let num = BigInt(Number(inpText));
+			let num = BigInt(inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
 		}
 		else if (isPlainBinInt.test(inpText))
 		{
-			let num = BigInt(Number("0b" + inpText));
+			let num = BigInt("0b" + inpText);
 			let val = new BigInt64Array([num]);
 			processInput(val);
 			return;
@@ -196,17 +196,24 @@ function processInput(val)
 	const sint32 = new Int32Array([Number(val[0])]);
 	const sint64 = new BigInt64Array([val[0]]);
 
-
-
-	processInputFor(uint8, "uint8");
+	processInputFor(val, uint8, "uint8");
 }
 
-function processInputFor(val, type)
+function processInputFor(origVal, val, type)
 {
+	const elm = document.getElementById(`${type}`);
 	const decElm = document.getElementById(`${type}-dec`);
 	const hexElm = document.getElementById(`${type}-hex`);
 	const octElm = document.getElementById(`${type}-oct`);
 	const binElm = document.getElementById(`${type}-bin`);
+
+	//console.log(``);
+
+	resetOverflowWarning(elm);
+	if (origVal[0] != BigInt(val[0]))
+	{
+		activateOverflowWarning(elm);
+	}
 
 	resetBadInput(decElm);
 	resetBadInput(hexElm);
