@@ -266,8 +266,12 @@ function processInput(val)
 
 	processInputFor(val, uint8, "uint8", 8);
 	processInputFor(val, uint16, "uint16", 16);
+	processInputFor(val, uint32, "uint32", 32);
+	processInputFor(val, uint64, "uint64", 64);
 	processInputFor(val, sint8, "sint8", 8);
 	processInputFor(val, sint16, "sint16", 16);
+	processInputFor(val, sint32, "sint32", 32);
+	processInputFor(val, sint64, "sint64", 64);
 }
 
 function processInputFor(origVal, val, type, actualBits)
