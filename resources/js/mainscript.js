@@ -1,4 +1,17 @@
 
+const isPlainDec = new RegExp("^[\+\-]?[0-9]+(\.[0-9]+(e[\+\-]?[0-9]+)?)?$");
+const isPlainDecInt = new RegExp("^[\+\-]?[0-9]+$");
+const isNonDecInt = new RegExp("^0[a-zA-Z][0-9]+$");
+
+const isHex = new RegExp("^0[xX][0-9a-fA-F]+$");
+const isPlainHexInt = new RegExp("^[0-9a-fA-F]+$");
+
+const isOct = new RegExp("^0[oO][0-7]+$");
+const isPlainOctInt = new RegExp("^[0-7]+$");
+
+const isBin = new RegExp("^0[bB][0-1]+$");
+const isPlainBinInt = new RegExp("^[0-1]+$");
+
 function handleMainInputChange(event)
 {
 	let radioInpChecked = document.querySelector('input[name="radio-textinp"]:checked');
@@ -9,6 +22,7 @@ function handleMainInputKeydown(event)
 {
 	if (event.key == "Enter")
 	{
+		event.target.blur();
 		let radioInpChecked = document.querySelector('input[name="radio-textinp"]:checked');
 		handleMainInput(event.target, event.target.value, radioInpChecked.value);
 	}
@@ -29,19 +43,6 @@ function handleMainInput(element, inpText, inpType)
 		activateBadInput(element);
 		return;
 	}
-
-	const isPlainDec = new RegExp("^[\+\-]?[0-9]+(\.[0-9]+(e[\+\-]?[0-9]+)?)?$");
-	const isPlainDecInt = new RegExp("^[\+\-]?[0-9]+$");
-	const isNonDecInt = new RegExp("^0[a-zA-Z]");
-
-	const isHex = new RegExp("^0[xX]");
-	const isPlainHexInt = new RegExp("^[0-9a-fA-F]+$");
-
-	const isOct = new RegExp("^0[oO]");
-	const isPlainOctInt = new RegExp("^[0-7]+$");
-
-	const isBin = new RegExp("^0[bB]");
-	const isPlainBinInt = new RegExp("^[0-1]+$");
 
 	if (inpType == "Auto")
 	{
@@ -163,6 +164,194 @@ function handleMainInput(element, inpText, inpType)
 	}
 }
 
+function handleInputChange(event)
+{
+	handleInput(event.target);
+}
+
+function handleInputFocusout(event)
+{
+	handleInput(event.target);
+}
+
+function handleInputKeydown(event)
+{
+	if (event.key == "Enter")
+	{
+		event.target.blur();
+		handleInput(event.target);
+	}
+}
+
+function handleInput(element)
+{
+	const inpText = element.value;
+	const elmId = element.id;
+	const inpType = elmId.slice(-3);
+	const inpSigned = (elmId[0] == "s");
+	const inpSize = Number.parseInt(elmId.slice(4));
+
+	resetBadInput(element);
+
+	if (inpType != "hex" && isNaN(Number(inpText)))
+	{
+		activateBadInput(element);
+		return;
+	}
+
+	if (inpType == "dec")
+	{
+		if (isPlainDecInt.test(inpText))
+		{
+			let num = BigInt(inpText);
+			if ((inpSigned && num < BigInt(2**inpSize / 2) && num >= BigInt(2**inpSize / -2)) || (!inpSigned && num >= 0 && num < BigInt(2**inpSize)))
+			{
+				let val = new BigInt64Array([num]);
+				processInput(val);
+				document.getElementById("main-text-input").value = inpText;
+				document.getElementById("radio-textinp-auto").checked = true;
+				return;
+			}
+			else
+			{
+				activateBadInput(element);
+				return;
+			}
+		}
+		else
+		{
+			activateBadInput(element);
+			return;
+		}
+	}
+	else if (inpType == "hex")
+	{
+		if (isHex.test(inpText))
+		{
+			let num = BigInt(inpText);
+			if (num >= 0 && num < BigInt(2**inpSize))
+			{
+				let val = new BigInt64Array([num]);
+				processInput(val);
+				document.getElementById("main-text-input").value = formatHex(val, inpSize);
+				document.getElementById("radio-textinp-auto").checked = true;
+				return;
+			}
+			else
+			{
+				activateBadInput(element);
+				return;
+			}
+		}
+		else if (isPlainHexInt.test(inpText))
+		{
+			let num = BigInt("0x" + inpText);
+			if (num >= 0 && num < BigInt(2**inpSize))
+			{
+				let val = new BigInt64Array([num]);
+				processInput(val);
+				document.getElementById("main-text-input").value = formatHex(val, inpSize);
+				document.getElementById("radio-textinp-auto").checked = true;
+				return;
+			}
+			else
+			{
+				activateBadInput(element);
+				return;
+			}
+		}
+		else
+		{
+			activateBadInput(element);
+			return;
+		}
+	}
+	else if (inpType == "oct")
+	{
+		if (isOct.test(inpText))
+		{
+			let num = BigInt(inpText);
+			if (num >= 0 && num < BigInt(2**inpSize))
+			{
+				let val = new BigInt64Array([num]);
+				processInput(val);
+				document.getElementById("main-text-input").value = formatOct(val, inpSize);
+				document.getElementById("radio-textinp-auto").checked = true;
+				return;
+			}
+			else
+			{
+				activateBadInput(element);
+				return;
+			}
+		}
+		else if (isPlainOctInt.test(inpText))
+		{
+			let num = BigInt("0o" + inpText);
+			if (num >= 0 && num < BigInt(2**inpSize))
+			{
+				let val = new BigInt64Array([num]);
+				processInput(val);
+				document.getElementById("main-text-input").value = formatOct(val, inpSize);
+				document.getElementById("radio-textinp-auto").checked = true;
+				return;
+			}
+			else
+			{
+				activateBadInput(element);
+				return;
+			}
+		}
+		else
+		{
+			activateBadInput(element);
+			return;
+		}
+	}
+	else if (inpType == "bin")
+	{
+		if (isBin.test(inpText))
+		{
+			let num = BigInt(inpText);
+			if (num >= 0 && num < BigInt(2**inpSize))
+			{
+				let val = new BigInt64Array([num]);
+				processInput(val);
+				document.getElementById("main-text-input").value = formatBin(val, inpSize);
+				document.getElementById("radio-textinp-auto").checked = true;
+				return;
+			}
+			else
+			{
+				activateBadInput(element);
+				return;
+			}
+		}
+		else if (isPlainBinInt.test(inpText))
+		{
+			let num = BigInt("0b" + inpText);
+			if (num >= 0 && num < BigInt(2**inpSize))
+			{
+				let val = new BigInt64Array([num]);
+				processInput(val);
+				document.getElementById("main-text-input").value = formatBin(val, inpSize);
+				document.getElementById("radio-textinp-auto").checked = true;
+				return;
+			}
+			else
+			{
+				activateBadInput(element);
+				return;
+			}
+		}
+		else
+		{
+			activateBadInput(element);
+			return;
+		}
+	}
+}
+
 function activateBadInput(element)
 {
 	element.classList.add("bad-input");
@@ -185,8 +374,6 @@ function resetOverflowWarning(element)
 
 function processInput(val)
 {
-	// console.log(`val = ${val}, type = ${typeof val}, class name = ${val.constructor.name}`);
-
 	const uint8 = new Uint8Array([Number(val[0])]);
 	const uint16 = new Uint16Array([Number(val[0])]);
 	const uint32 = new Uint32Array([Number(val[0])]);
@@ -197,6 +384,9 @@ function processInput(val)
 	const sint64 = new BigInt64Array([val[0]]);
 
 	processInputFor(val, uint8, "uint8", 8);
+	processInputFor(val, uint16, "uint16", 16);
+	processInputFor(val, sint8, "sint8", 8);
+	processInputFor(val, sint16, "sint16", 16);
 }
 
 function processInputFor(origVal, val, type, actualBits)
@@ -206,8 +396,6 @@ function processInputFor(origVal, val, type, actualBits)
 	const hexElm = document.getElementById(`${type}-hex`);
 	const octElm = document.getElementById(`${type}-oct`);
 	const binElm = document.getElementById(`${type}-bin`);
-
-	//console.log(``);
 
 	resetOverflowWarning(elm);
 	if (origVal[0] != BigInt(val[0]))
@@ -220,8 +408,27 @@ function processInputFor(origVal, val, type, actualBits)
 	resetBadInput(octElm);
 	resetBadInput(binElm);
 
-	decElm.value = val[0].toString();
-	hexElm.value = "0x" + val[0].toString(16).toUpperCase().padStart(actualBits / 4, '0');
-	octElm.value = "0o" + val[0].toString(8).padStart(Math.ceil(actualBits / 3), '0');
-	binElm.value = "0b" + val[0].toString(2).padStart(actualBits, '0');
+	if (document.activeElement !== decElm)
+		decElm.value = val[0].toString();
+	if (document.activeElement !== hexElm)
+		hexElm.value = formatHex(val, actualBits);
+	if (document.activeElement !== octElm)
+		octElm.value = formatOct(val, actualBits);
+	if (document.activeElement !== binElm)
+		binElm.value = formatBin(val, actualBits);
+}
+
+function formatHex(val, actualBits)
+{
+	return "0x" + (BigInt.asUintN(64, BigInt(val[0])) % (2n**BigInt(actualBits))).toString(16).toUpperCase().padStart(actualBits / 4, '0');
+}
+
+function formatOct(val, actualBits)
+{
+	return "0o" + (BigInt.asUintN(64, BigInt(val[0])) % (2n**BigInt(actualBits))).toString(8).padStart(Math.ceil(actualBits / 3), '0').slice(-Math.ceil(actualBits / 3));
+}
+
+function formatBin(val, actualBits)
+{
+	return "0b" + (BigInt.asUintN(64, BigInt(val[0])) % (2n**BigInt(actualBits))).toString(2).padStart(actualBits, '0').slice(-actualBits);
 }

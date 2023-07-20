@@ -29,21 +29,45 @@
 				<div class="primtype-div" id="uint8">
 					<div class="vert-flexbox-thin">
 						<p>Unsigned 8-bit Int</p>
-						<input type="text" class="output-textarea" rows=1 id="uint8-dec" onchange="handleInputChange(event)">
-						<input type="text" class="output-textarea" rows=1 id="uint8-hex">
-						<input type="text" class="output-textarea" rows=1 id="uint8-oct">
-						<input type="text" class="output-textarea" rows=1 id="uint8-bin">
+						<input type="text" class="output-textarea" rows=1 id="uint8-dec" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="uint8-hex" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="uint8-oct" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="uint8-bin" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
 					</div>
 				</div>
 
 				<div class="primtype-div" id="sint8">
 					<div class="vert-flexbox-thin">
 						<p>Signed 8-bit Int</p>
-						<input type="text" class="output-textarea" rows=1 id="uint8-dec">
-						<input type="text" class="output-textarea" rows=1 id="uint8-hex">
-						<input type="text" class="output-textarea" rows=1 id="uint8-oct">
-						<input type="text" class="output-textarea" rows=1 id="uint8-bin">
+						<input type="text" class="output-textarea" rows=1 id="sint8-dec" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="sint8-hex" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="sint8-oct" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="sint8-bin" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
 						<span class="bin-buttons"></span>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="horiz-flexbox">
+
+				<div class="primtype-div" id="uint16">
+					<div class="vert-flexbox-thin">
+						<p>Unsigned 16-bit Int</p>
+						<input type="text" class="output-textarea" rows=1 id="uint16-dec" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="uint16-hex" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="uint16-oct" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="uint16-bin" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+					</div>
+				</div>
+
+				<div class="primtype-div" id="sint16">
+					<div class="vert-flexbox-thin">
+						<p>Signed 16-bit Int</p>
+						<input type="text" class="output-textarea" rows=1 id="sint16-dec" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="sint16-hex" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="sint16-oct" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
+						<input type="text" class="output-textarea" rows=1 id="sint16-bin" oninput="handleInputChange(event)" onfocusout="handleInputFocusout(event)" onkeydown="handleInputKeydown(event)">
 					</div>
 				</div>
 

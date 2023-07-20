@@ -51,7 +51,7 @@ label
 	padding: var(--padding);
 	margin-top: var(--medium-margin);
 
-	width: calc(var(--big-margin) * 5);
+	width: calc(var(--big-margin) * 11);
 
 	font-family: var(--monospace-font);
 }
@@ -135,6 +135,7 @@ input[type="checkbox"]
 {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 
 	margin: 0px;
 	padding: 0px;
@@ -142,7 +143,7 @@ input[type="checkbox"]
 
 .vert-flexbox > div
 {
-	margin-bottom: var(--big-margin);
+	margin-top: var(--big-margin);
 }
 
 .vert-flexbox-thin
