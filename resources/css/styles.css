@@ -4,7 +4,7 @@
 	--margin: 0px;
 	--padding: 1px;
 	--medium-margin: 5px;
-	--big-margin: 50px;
+	--big-margin: 30px;
 
 	--sans-serif-font: sans-serif;
 	--monospace-font: monospace;
@@ -143,7 +143,7 @@ input[type="checkbox"]
 
 .vert-flexbox > div
 {
-	margin-top: var(--big-margin);
+	margin-bottom: var(--big-margin);
 }
 
 .vert-flexbox-thin
