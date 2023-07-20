@@ -8,6 +8,9 @@
 
 	--sans-serif-font: sans-serif;
 	--monospace-font: monospace;
+
+	--red: #ffc8c8;
+	--yellow: #fffec8;
 }
 
 body
@@ -27,6 +30,7 @@ label
 {
 	margin: var(--margin);
 	padding: var(--padding);
+	margin-right: var(--medium-margin);
 
 	font-family: var(--sans-serif-font);
 }
@@ -37,8 +41,6 @@ label
 	padding: var(--padding);
 
 	width: calc(var(--big-margin) * 7);
-
-	resize: none;
 	
 	font-family: var(--monospace-font);
 }
@@ -51,9 +53,17 @@ label
 
 	width: calc(var(--big-margin) * 5);
 
-	resize: none;
-
 	font-family: var(--monospace-font);
+}
+
+.bad-input
+{
+	background-color: var(--red);
+}
+
+.overflow-warning
+{
+	background-color: var(--yellow);
 }
 
 input[type="radio"]
@@ -68,10 +78,12 @@ input[type="checkbox"]
 	padding: var(--padding);
 }
 
+/*
 .bin-buttons
 {
 
 }
+*/
 
 .primtype-div
 {

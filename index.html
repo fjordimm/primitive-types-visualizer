@@ -13,16 +13,14 @@
 
 			<div class="vert-list">
 				<p>Input:</p>
+				<input type="text" class="input-textarea" id="main-text-input" onchange="handleMainInputChange(event)">
 				<div class="horiz-plain-line">
-					<textarea class="input-textarea" rows=1 id="main-text-input"></textarea>
-					<button>Update</button>
-				</div>
-				<div class="horiz-plain-line">
-					<label><input type="radio" name="radio-textinp" id="radio-textinp-auto" value="Auto" checked>Auto</label>
-					<label><input type="radio" name="radio-textinp" id="radio-textinp-decimal" value="Decimal">Decimal</label>
-					<label><input type="radio" name="radio-textinp" id="radio-textinp-hexadecimal" value="Hexadecimal">Hexadecimal</label>
-					<label><input type="radio" name="radio-textinp" id="radio-textinp-octal" value="Octal">Octal</label>
-					<label><input type="radio" name="radio-textinp" id="radio-textinp-binary" value="Binary">Binary</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-auto" onclick="handleRadioInputClick(event)" value="Auto" checked>Auto</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-decimal" onclick="handleRadioInputClick(event)" value="Decimal (Int)">Decimal (Int)</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-decimal" onclick="handleRadioInputClick(event)" value="Decimal (Float)">Decimal (Float)</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-hexadecimal" onclick="handleRadioInputClick(event)" value="Hexadecimal">Hexadecimal</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-octal" onclick="handleRadioInputClick(event)" value="Octal">Octal</label>
+					<label><input type="radio" name="radio-textinp" id="radio-textinp-binary" onclick="handleRadioInputClick(event)" value="Binary">Binary</label>
 				</div>
 			</div>
 
@@ -31,20 +29,20 @@
 				<div class="primtype-div" id="uint8">
 					<div class="vert-flexbox-thin">
 						<p>Unsigned 8-bit Int</p>
-						<textarea class="output-textarea" rows=1 id="uint8-dec"></textarea>
-						<textarea class="output-textarea" rows=1 id="uint8-hex"></textarea>
-						<textarea class="output-textarea" rows=1 id="uint8-octal"></textarea>
-						<textarea class="output-textarea" rows=1 id="uint8-binary"></textarea>
+						<input type="text" class="output-textarea" rows=1 id="uint8-dec">
+						<input type="text" class="output-textarea" rows=1 id="uint8-hex">
+						<input type="text" class="output-textarea" rows=1 id="uint8-octal">
+						<input type="text" class="output-textarea" rows=1 id="uint8-binary">
 					</div>
 				</div>
 
 				<div class="primtype-div" id="sint8">
 					<div class="vert-flexbox-thin">
 						<p>Signed 8-bit Int</p>
-						<textarea class="output-textarea" rows=1 id="uint8-dec"></textarea>
-						<textarea class="output-textarea" rows=1 id="uint8-hex"></textarea>
-						<textarea class="output-textarea" rows=1 id="uint8-octal"></textarea>
-						<textarea class="output-textarea" rows=1 id="uint8-binary"></textarea>
+						<input type="text" class="output-textarea" rows=1 id="uint8-dec">
+						<input type="text" class="output-textarea" rows=1 id="uint8-hex">
+						<input type="text" class="output-textarea" rows=1 id="uint8-octal">
+						<input type="text" class="output-textarea" rows=1 id="uint8-binary">
 						<span class="bin-buttons"></span>
 					</div>
 				</div>
@@ -52,6 +50,9 @@
 			</div>
 
 		</div>
+
+		<script src="./resources/js/mainscript.js"></script>
+
 	</body>
 
 </html>
