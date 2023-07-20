@@ -13,7 +13,7 @@ const isPlainBinInt = new RegExp("^[0-1]+$");
 
 function handleMainInputChange(event)
 {
-	handleMainInput(event.target, event.target.value);
+	handleMainInput(event.target);
 }
 
 function handleMainInputKeydown(event)
@@ -21,12 +21,14 @@ function handleMainInputKeydown(event)
 	if (event.key == "Enter")
 	{
 		event.target.blur();
-		handleMainInput(event.target, event.target.value);
+		handleMainInput(event.target);
 	}
 }
 
-function handleMainInput(element, inpText)
+function handleMainInput(element)
 {
+	const inpText = element.value;
+
 	resetBadInput(element);
 
 	if (isPlainDecInt.test(inpText) || isHex.test(inpText) || isOct.test(inpText) || isBin.test(inpText))
@@ -57,7 +59,7 @@ function handleInputChange(event)
 
 function handleInputFocusout(event)
 {
-	handleInput(event.target);
+	handleMainInput(document.getElementById("main-text-input"));
 }
 
 function handleInputKeydown(event)
@@ -95,7 +97,6 @@ function handleInput(element)
 				let val = new BigInt64Array([num]);
 				processInput(val);
 				document.getElementById("main-text-input").value = inpText;
-				document.getElementById("radio-textinp-auto").checked = true;
 				return;
 			}
 			else
@@ -120,7 +121,6 @@ function handleInput(element)
 				let val = new BigInt64Array([num]);
 				processInput(val);
 				document.getElementById("main-text-input").value = formatHex(val, inpSize);
-				document.getElementById("radio-textinp-auto").checked = true;
 				return;
 			}
 			else
@@ -137,7 +137,6 @@ function handleInput(element)
 				let val = new BigInt64Array([num]);
 				processInput(val);
 				document.getElementById("main-text-input").value = formatHex(val, inpSize);
-				document.getElementById("radio-textinp-auto").checked = true;
 				return;
 			}
 			else
@@ -162,7 +161,6 @@ function handleInput(element)
 				let val = new BigInt64Array([num]);
 				processInput(val);
 				document.getElementById("main-text-input").value = formatOct(val, inpSize);
-				document.getElementById("radio-textinp-auto").checked = true;
 				return;
 			}
 			else
@@ -179,7 +177,6 @@ function handleInput(element)
 				let val = new BigInt64Array([num]);
 				processInput(val);
 				document.getElementById("main-text-input").value = formatOct(val, inpSize);
-				document.getElementById("radio-textinp-auto").checked = true;
 				return;
 			}
 			else
@@ -204,7 +201,6 @@ function handleInput(element)
 				let val = new BigInt64Array([num]);
 				processInput(val);
 				document.getElementById("main-text-input").value = formatBin(val, inpSize);
-				document.getElementById("radio-textinp-auto").checked = true;
 				return;
 			}
 			else
@@ -221,7 +217,6 @@ function handleInput(element)
 				let val = new BigInt64Array([num]);
 				processInput(val);
 				document.getElementById("main-text-input").value = formatBin(val, inpSize);
-				document.getElementById("radio-textinp-auto").checked = true;
 				return;
 			}
 			else
@@ -293,6 +288,11 @@ function processInputFor(origVal, val, type, actualBits)
 	resetBadInput(hexElm);
 	resetBadInput(octElm);
 	resetBadInput(binElm);
+
+	console.log(val[0].toString());
+	console.log(formatHex(val, actualBits));
+	console.log(formatOct(val, actualBits));
+	console.log(formatBin(val, actualBits));
 
 	if (document.activeElement !== decElm)
 		decElm.value = val[0].toString();
