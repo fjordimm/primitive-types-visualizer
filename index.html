@@ -13,7 +13,7 @@
 
 			<div class="vert-list">
 				<p>Input:</p>
-				<input type="text" class="input-textarea" id="main-text-input" onchange="handleMainInputChange(event)">
+				<input type="text" class="input-textarea" id="main-text-input" oninput="handleMainInputChange(event)" onkeydown="handleMainInputKeydown(event)">
 				<div class="horiz-plain-line">
 					<label><input type="radio" name="radio-textinp" id="radio-textinp-auto" onclick="handleRadioInputClick(event)" value="Auto" checked>Auto</label>
 					<label><input type="radio" name="radio-textinp" id="radio-textinp-decimal" onclick="handleRadioInputClick(event)" value="Decimal (Int)">Decimal (Int)</label>
@@ -29,10 +29,10 @@
 				<div class="primtype-div" id="uint8">
 					<div class="vert-flexbox-thin">
 						<p>Unsigned 8-bit Int</p>
-						<input type="text" class="output-textarea" rows=1 id="uint8-dec">
+						<input type="text" class="output-textarea" rows=1 id="uint8-dec" onchange="handleInputChange(event)">
 						<input type="text" class="output-textarea" rows=1 id="uint8-hex">
-						<input type="text" class="output-textarea" rows=1 id="uint8-octal">
-						<input type="text" class="output-textarea" rows=1 id="uint8-binary">
+						<input type="text" class="output-textarea" rows=1 id="uint8-oct">
+						<input type="text" class="output-textarea" rows=1 id="uint8-bin">
 					</div>
 				</div>
 
@@ -41,8 +41,8 @@
 						<p>Signed 8-bit Int</p>
 						<input type="text" class="output-textarea" rows=1 id="uint8-dec">
 						<input type="text" class="output-textarea" rows=1 id="uint8-hex">
-						<input type="text" class="output-textarea" rows=1 id="uint8-octal">
-						<input type="text" class="output-textarea" rows=1 id="uint8-binary">
+						<input type="text" class="output-textarea" rows=1 id="uint8-oct">
+						<input type="text" class="output-textarea" rows=1 id="uint8-bin">
 						<span class="bin-buttons"></span>
 					</div>
 				</div>

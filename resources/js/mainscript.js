@@ -5,7 +5,6 @@ function handleMainInputChange(event)
 	handleMainInput(event.target, event.target.value, radioInpChecked.value);
 }
 
-/*
 function handleMainInputKeydown(event)
 {
 	if (event.key == "Enter")
@@ -14,7 +13,6 @@ function handleMainInputKeydown(event)
 		handleMainInput(event.target, event.target.value, radioInpChecked.value);
 	}
 }
-*/
 
 function handleRadioInputClick(event)
 {
@@ -175,7 +173,46 @@ function resetBadInput(element)
 	element.classList.remove("bad-input");
 }
 
+function activateOverflowWarning(element)
+{
+	element.classList.add("overflow-warning");
+}
+
+function resetOverflowWarning(element)
+{
+	element.classList.remove("overflow-warning");
+}
+
 function processInput(val)
 {
-	console.log(`val = ${val}, type = ${typeof val}, class name = ${val.constructor.name}`);
+	// console.log(`val = ${val}, type = ${typeof val}, class name = ${val.constructor.name}`);
+
+	const uint8 = new Uint8Array([Number(val[0])]);
+	const uint16 = new Uint16Array([Number(val[0])]);
+	const uint32 = new Uint32Array([Number(val[0])]);
+	const uint64 = new BigUint64Array([val[0]]);
+	const sint8 = new Int8Array([Number(val[0])]);
+	const sint16 = new Int16Array([Number(val[0])]);
+	const sint32 = new Int32Array([Number(val[0])]);
+	const sint64 = new BigInt64Array([val[0]]);
+
+
+
+	processInputFor(uint8, "uint8");
+}
+
+function processInputFor(val, type)
+{
+	const decElm = document.getElementById(`${type}-dec`);
+	const hexElm = document.getElementById(`${type}-hex`);
+	const octElm = document.getElementById(`${type}-oct`);
+	const binElm = document.getElementById(`${type}-bin`);
+
+	resetBadInput(decElm);
+	resetBadInput(hexElm);
+	resetBadInput(octElm);
+	resetBadInput(binElm);
+
+	decElm.value = val[0].toString();
+	hexElm.value = "0x" + val[0].toString(16);
 }
